@@ -6,7 +6,7 @@ function Root() {
   return (
     <>
       <Navbar />
-      <div>
+      <div className="max-w-[1280px] mx-auto">
         <Outlet />
       </div>
       <Footer />
