@@ -21,8 +21,7 @@ const Signin = () => {
     e.preventDefault();
     setError("");
     signinWithEmailPassword(email, password)
-      .then((res) => {
-        console.log(res.user);
+      .then(() => {
         setLoading(false);
       })
       .catch((err) => setError(err.message));
@@ -32,8 +31,7 @@ const Signin = () => {
     setLoading(true);
 
     signinWithGoogle()
-      .then((res) => {
-        console.log(res.user);
+      .then(() => {
         setLoading(false);
       })
       .catch((err) => setError(err.message));

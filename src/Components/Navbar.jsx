@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading, signOutUser } = useContext(AuthContext);
   const publicLinks = (
     <>
       <li>
@@ -69,16 +69,7 @@ const Navbar = () => {
       <div className="navbar-end">
         {loading ? (
           <span className="loading loading-spinner loading-lg flex item-center mx-auto"></span>
-        ) : !user ? (
-          <>
-            <Link to={"/signup"} className="btn">
-              Sign Up
-            </Link>
-            <Link to={"/signin"} className="btn">
-              Sign In
-            </Link>
-          </>
-        ) : (
+        ) : user ? (
           <div className="dropdown dropdown-hover dropdown-end">
             <div
               tabIndex={0}
@@ -87,28 +78,36 @@ const Navbar = () => {
             >
               <div className="w-10 rounded-full">
                 <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  className="w-full h-full"
+                  alt={user.displayName}
+                  src={user?.photoURL}
                 />
               </div>
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[10000] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a className="justify-between">
-                  Profile
-                </a>
+                <a className="justify-between">Profile</a>
               </li>
               <li>
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <a onClick={signOutUser}>Logout</a>
               </li>
             </ul>
           </div>
+        ) : (
+          <>
+            <Link to={"/signup"} className="btn">
+              Sign Up
+            </Link>
+            <Link to={"/signin"} className="btn">
+              Sign In
+            </Link>
+          </>
         )}
       </div>
     </div>
