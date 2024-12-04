@@ -6,6 +6,7 @@ function Root() {
   return (
     <>
       <Navbar />
+      <hr className="border-2" />
       <div className="max-w-[1280px] mx-auto">
         <Outlet />
       </div>

@@ -1,50 +1,29 @@
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
 const Banner = () => {
   return (
-    <div>
-      <div className="carousel carousel-center bg-neutral rounded-box  space-x-4 p-4">
-        <div className="carousel-item  w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp"
-            className="rounded-box  w-full"
-          />
-        </div>
-        <div className="carousel-item  w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp"
-            className="rounded-box  w-full"
-          />
-        </div>
-        <div className="carousel-item  w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp"
-            className="rounded-box  w-full"
-          />
-        </div>
-        <div className="carousel-item  w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.webp"
-            className="rounded-box  w-full"
-          />
-        </div>
-        <div className="carousel-item  w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.webp"
-            className="rounded-box  w-full"
-          />
-        </div>
-        <div className="carousel-item  w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.webp"
-            className="rounded-box  w-full"
-          />
-        </div>
-        <div className="carousel-item  w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.webp"
-            className="rounded-box  w-full"
-          />
-        </div>
-      </div>
+    <div className="container mx-auto my-8">
+      <Swiper
+        modules={[Navigation]}
+        navigation
+        spaceBetween={50}
+        slidesPerView={1}
+        onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => console.log(swiper)}
+      >
+        <SwiperSlide>
+          <img src="https://blogbymichele.wordpress.com/wp-content/uploads/2023/04/success.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://imageio.forbes.com/specials-images/imageserve/63cc14a828e2b2c728922d86/0x0.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://one-more-tree.org/wp-content/uploads/2024/04/599323-870x563.jpg" />
+        </SwiperSlide>
+      </Swiper>
     </div>
   );
 };
