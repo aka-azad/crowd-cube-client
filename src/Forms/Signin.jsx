@@ -3,6 +3,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { Link, Navigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const Signin = () => {
   const { user, signinWithEmailPassword, signinWithGoogle, setLoading } =
@@ -31,8 +32,24 @@ const Signin = () => {
     setLoading(true);
 
     signinWithGoogle()
-      .then(() => {
+      .then((res) => {
         setLoading(false);
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            displayName: res.user.displayName,
+            email: res.user.email,
+            photoURL: res.user.photoURL,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            data.insertedId && toast.success("Account Registered Successfully");
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => setError(err.message));
   };

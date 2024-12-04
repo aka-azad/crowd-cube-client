@@ -43,6 +43,13 @@ const Signup = () => {
       .then(() => {
         updateProfile(auth.currentUser, { displayName: name, photoURL });
         toast.success("Successfully registered!");
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ displayName: name, photoURL, email }),
+        }).catch((err) => console.log(err));
         navigate("/");
       })
       .catch((err) => {
