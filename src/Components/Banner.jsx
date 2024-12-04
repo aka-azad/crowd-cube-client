@@ -1,7 +1,7 @@
 const Banner = () => {
   return (
     <div>
-      <div className="carousel carousel-center bg-neutral rounded-box space-x-4 p-4">
+      <div className="carousel carousel-center bg-neutral rounded-box  space-x-4 p-4">
         <div className="carousel-item  w-full">
           <img
             src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp"

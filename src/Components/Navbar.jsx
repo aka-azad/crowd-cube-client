@@ -12,6 +12,19 @@ const Navbar = () => {
     </>
   );
 
+  const privateLinks = (
+    <>
+      <li>
+        <NavLink to={"/add-campaign"}>Add New Campaign</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/my-campaigns"}>My Campaigns</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/my-donations"}>My Donations</NavLink>
+      </li>
+    </>
+  );
   return (
     <div className="navbar max-w-[1300px] mx-auto">
       <div className="navbar-start">
@@ -37,16 +50,26 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             {publicLinks}
+            {privateLinks}
           </ul>
         </div>
-        <Link to={'/'} className="font-bold text-xl">CrowdCube</Link>
+        <Link to={"/"} className="font-bold text-xl">
+          CrowdCube
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{publicLinks}</ul>
+        <ul className="menu menu-horizontal px-1">
+          {publicLinks}
+          {privateLinks}
+        </ul>
       </div>
       <div className="navbar-end">
-        <Link className="btn">Sign Up</Link>
-        <Link className="btn">Sign In</Link>
+        <Link to={"/signup"} className="btn">
+          Sign Up
+        </Link>
+        <Link to={"/signin"} className="btn">
+          Sign In
+        </Link>
       </div>
     </div>
   );
