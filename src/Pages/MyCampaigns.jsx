@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const MyCampaigns = () => {
   const { user } = useContext(AuthContext);
@@ -9,7 +10,7 @@ const MyCampaigns = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/my-campaigns/${user.email}`)
+    fetch(`http://localhost:5000/campaigns/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setMyCampaigns(data);
@@ -22,9 +23,21 @@ const MyCampaigns = () => {
       <span className="loading loading-spinner loading-lg flex item-center mx-auto"></span>
     );
   }
-  console.log(myCampaigns?.length);
-  //   const handleUpdate = (id) => {
-  //   };
+  if (myCampaigns.length == 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-white rounded-3xl my-5">
+        <h1 className="text-5xl font-extrabold mb-8">
+          {"You Don't have any campaigns on going!"}
+        </h1>
+        <Link
+          to={"/add-campaign"}
+          className="btn btn-outline btn-lg font-semibold border-white text-white hover:bg-white hover:text-black"
+        >
+          Add A New Campaign
+        </Link>
+      </div>
+    );
+  }
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -38,7 +51,7 @@ const MyCampaigns = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setLoading(true);
-        fetch(`http://localhost:5000/my-campaigns/${id}`, {
+        fetch(`http://localhost:5000/campaigns/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -92,12 +105,12 @@ const MyCampaigns = () => {
                 <td>{campaign.minDonation}</td>
                 <td>{new Date(campaign.deadline).toLocaleDateString()}</td>
                 <td className="md:flex">
-                  <button
-                    // onClick={() => handleUpdate(campaign._id)}
+                  <Link
+                    to={`/update-campaign/${campaign._id}`}
                     className="btn btn-sm btn-primary mr-2 mb-2 md:w-1/2 w-auto"
                   >
                     Update
-                  </button>
+                  </Link>
                   <button
                     onClick={() => handleDelete(campaign._id)}
                     className="btn btn-sm btn-danger md:w-1/2 w-auto"

@@ -1,15 +1,19 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
+import { useLoaderData, useNavigate } from "react-router";
 
-const AddCampaign = () => {
+const UpdateCampaign = () => {
   const { user } = useContext(AuthContext);
-  const [title, setTitle] = useState("");
-  const [type, setType] = useState("");
-  const [description, setDescription] = useState("");
-  const [minDonation, setMinDonation] = useState("");
-  const [deadline, setDeadline] = useState("");
-  const [imageURL, setImageURL] = useState("");
+  const campaign = useLoaderData();
+  const navigate = useNavigate();
+  const [title, setTitle] = useState(campaign?.title || "");
+  const [type, setType] = useState(campaign?.type || "");
+  const [description, setDescription] = useState(campaign?.description || "");
+  const [minDonation, setMinDonation] = useState(campaign?.minDonation || "");
+  const [deadline, setDeadline] = useState(campaign?.deadline || "");
+  const [imageURL, setImageURL] = useState(campaign?.imageURL || "");
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -21,12 +25,10 @@ const AddCampaign = () => {
       deadline,
       imageURL,
       email: user.email,
-      fundBalance: 0,
     };
-    console.log(campaignData);
 
-    fetch("http://localhost:5000/campaigns", {
-      method: "POST",
+    fetch(`http://localhost:5000/campaigns/${campaign._id}`, {
+      method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
@@ -34,17 +36,18 @@ const AddCampaign = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId > 0) {
-          toast.success("Campaign added successfully!");
-          toast.success("Campaign added successfully!");
+        console.log(data)
+        if (data.modifiedCount > 0) {
+          toast.success("Campaign Updated successfully!");
+          navigate("/my-campaigns");
         }
       })
-      .catch((err) => toast.warning(err.message));
+      .catch((err) => console.log(err));
   };
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold text-center mb-6">Add New Campaign</h1>
+      <h1 className="text-3xl font-bold text-center mb-6">Update Campaign</h1>
       <form
         onSubmit={handleSubmit}
         className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md"
@@ -149,7 +152,7 @@ const AddCampaign = () => {
         </div>
         <div className="form-control">
           <button type="submit" className="btn btn-primary w-full">
-            Add
+            Update
           </button>
         </div>
       </form>
@@ -157,4 +160,4 @@ const AddCampaign = () => {
   );
 };
 
-export default AddCampaign;
+export default UpdateCampaign;
