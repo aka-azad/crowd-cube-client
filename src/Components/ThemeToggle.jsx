@@ -13,12 +13,15 @@ const ThemeToggle = () => {
   };
 
   return (
-    <button
-      onClick={toggleTheme}
-      className={`btn btn-outline  ${theme === "pastel" && 'bg-slate-400'}`}
-    >
-      {theme === "pastel" ? "🌙 Dark Mode" : "🌞 Light Mode"}
-    </button>
+    <label className="swap swap-rotate">
+      <input
+        type="checkbox"
+        className="toggle"
+        defaultChecked={theme === "forest"}
+        onChange={toggleTheme}
+      />
+      <span className="swap-on">🌞</span> <span className="swap-off text-right">🌙</span>
+    </label>
   );
 };
 

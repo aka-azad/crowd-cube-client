@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import CampaignCard from "../Components/CampaignCard";
 import { Link } from "react-router";
+import LottieLoader from "../Components/LottieLoader";
 
 const MyDonations = () => {
   const { user } = useContext(AuthContext);
@@ -17,11 +18,8 @@ const MyDonations = () => {
       })
       .catch((error) => console.error("Error fetching donations:", error));
   }, [user]);
-  console.log(donations);
   if (loading) {
-    return (
-      <span className="loading loading-spinner loading-lg flex item-center mx-auto"></span>
-    );
+    return <LottieLoader />;
   }
   if (donations.length == 0) {
     return (

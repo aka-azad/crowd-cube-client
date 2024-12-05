@@ -31,7 +31,7 @@ const steps = [
 const HowItWorks = () => {
   return (
     <div className="container mx-auto my-11">
-      <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+      <h2 className="text-3xl font-bold text-center mb-12">How This Platform Works</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         {steps.map((step, index) => (
           <div key={index} className="bg-white shadow-lg rounded-lg p-6 text-center">

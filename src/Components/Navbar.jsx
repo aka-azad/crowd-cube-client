@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import ThemeToggle from "./ThemeToggle";
+import Lottie from "lottie-react";
+import lottieLooking from "../assets/lottieLooking.json";
 
 const Navbar = () => {
   const { user, loading, signOutUser } = useContext(AuthContext);
@@ -19,22 +21,22 @@ const Navbar = () => {
   const privateLinks = (
     <>
       <li>
-        <NavLink to={"/add-campaign"}>Add New Campaign</NavLink>
+        <NavLink to="/add-campaign">Add New Campaign</NavLink>
       </li>
       <li>
-        <NavLink to={"/my-campaigns"}>My Campaigns</NavLink>
+        <NavLink to="/my-campaigns">My Campaigns</NavLink>
       </li>
       <li>
-        <NavLink to={"/my-donations"}>My Donations</NavLink>
+        <NavLink to="/my-donations">My Donations</NavLink>
       </li>
     </>
   );
   return (
-    <div className=" bg-gray-800 text-white">
+    <div className="bg-gray-800 bg-opacity-70 backdrop-blur-lg text-white sticky top-0 z-50">
       <div className="navbar max-w-[1300px] mx-auto">
-        <div className="navbar-start">
+        <div className="navbar-start items-center">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div tabIndex={0} role="button" className="btn pl-0 pr-2 btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -58,7 +60,7 @@ const Navbar = () => {
               {user && privateLinks}
             </ul>
           </div>
-          <Link to={"/"} className="font-bold text-xl">
+          <Link to="/" className="font-bold text-xl">
             CrowdCube
           </Link>
         </div>
@@ -69,10 +71,15 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <ThemeToggle />
+          <div className="mr-2 flex items-center">
+            <ThemeToggle />
+          </div>
           {loading ? (
-            <span className="loading loading-spinner loading-lg flex item-center mx-auto"></span>
-          ) : user ? (
+            <div className="h-[50px] w-[60px]">
+              <Lottie animationData={lottieLooking} className="h-full w-full" />
+            </div>
+          ) : // <span className="loading loading-spinner loading-lg flex item-center mx-auto"></span>
+          user ? (
             <div className="dropdown dropdown-hover dropdown-end">
               <div
                 tabIndex={0}
@@ -101,10 +108,13 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to={"/signup"} className="btn btn-primary">
+              <Link
+                to="/signup"
+                className="btn btn-primary mr-2"
+              >
                 Sign Up
               </Link>
-              <Link to={"/signin"} className="btn btn-secondary">
+              <Link to="/signin" className="btn btn-secondary">
                 Sign In
               </Link>
             </>

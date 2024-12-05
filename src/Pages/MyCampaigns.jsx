@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
+import LottieLoader from "../Components/LottieLoader";
 
 const MyCampaigns = () => {
   const { user } = useContext(AuthContext);
@@ -20,7 +21,7 @@ const MyCampaigns = () => {
 
   if (loading) {
     return (
-      <span className="loading loading-spinner loading-lg flex item-center mx-auto"></span>
+      <LottieLoader/>
     );
   }
   if (myCampaigns.length == 0) {

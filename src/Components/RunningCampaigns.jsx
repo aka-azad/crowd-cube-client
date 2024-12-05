@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CampaignCard from "./CampaignCard";
+import LottieLoader from "./LottieLoader";
 
 const RunningCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -23,7 +24,7 @@ const RunningCampaigns = () => {
         <h1 className="text-3xl font-bold text-center mb-6">
           Running Campaigns
         </h1>
-        <span className="loading loading-spinner loading-lg flex item-center mx-auto"></span>
+        <LottieLoader />
       </div>
     );
   }

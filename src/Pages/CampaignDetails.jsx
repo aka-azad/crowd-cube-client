@@ -73,8 +73,10 @@ const CampaignDetails = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold text-center mb-6">{title}</h1>
+    <div className="container mx-auto  p-4">
+      <h1 className="text-3xl font-bold text-primary-content text-center mb-6">
+        Description
+      </h1>
       <div className="max-w-4xl mx-auto  rounded-lg shadow-lg p-6">
         <img
           className="w-full h-64 object-cover rounded-lg mb-4"
@@ -82,6 +84,7 @@ const CampaignDetails = () => {
           alt={title}
         />
         <div>
+          <h1 className="text-2xl font-bold text-center mb-6">{title}</h1>
           <table className="table w-full">
             <tbody className="text-left *:border">
               <tr className="*:border">
@@ -113,14 +116,15 @@ const CampaignDetails = () => {
             </tbody>
           </table>
         </div>
-
-        <button
-          onClick={handleDonate}
-          className="btn btn-primary mt-4"
-          disabled={isDonatable}
-        >
-          Donate
-        </button>
+        <div className="w-fit mx-auto">
+          <button
+            onClick={handleDonate}
+            className="btn btn-primary btn-wide text-lg mt-4"
+            disabled={isDonatable}
+          >
+            Donate
+          </button>
+        </div>
         {email == user.email && (
           <p className="text-red-500 mt-2">
             You can&apos;t donate on your campaign.
