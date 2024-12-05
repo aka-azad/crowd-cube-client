@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const CampaignCard = ({ campaign }) => {
   return (
     <div className="max-w-sm rounded-2xl overflow-hidden pb-4 shadow-lg bg-white">
-      <img className="w-full" src={campaign.imageURL} alt={campaign.title} />
+      <img className="w-full h-64 object-cover" src={campaign.imageURL} alt={campaign.title} />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{campaign.title}</div>
         <p className="text-gray-700 text-base">Type: {campaign.type}</p>

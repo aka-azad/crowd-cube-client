@@ -7,9 +7,18 @@ const CampaignDetails = () => {
   const campaign = useLoaderData();
   const { user } = useContext(AuthContext);
   const [balance, setBalance] = useState(campaign.fundBalance);
-
+  const {
+    _id,
+    imageURL,
+    title,
+    type,
+    minDonation,
+    deadline,
+    email,
+    description,
+  } = campaign;
   const [isDonatable, setDonatable] = useState(false);
-  //   const isDeadlinePassed = new Date(campaign.deadline) < new Date();
+
   useEffect(() => {
     if (
       campaign.email == user.email ||
@@ -18,12 +27,17 @@ const CampaignDetails = () => {
       setDonatable(true);
     }
   }, []);
-  console.log(isDonatable);
-  const handleDonate = async () => {
+  const handleDonate = () => {
     const donationData = {
-      campaignId: campaign._id,
+      campaignId: _id,
       displayName: user.displayName,
       email: user.email,
+      imageURL,
+      title,
+      type,
+      minDonation,
+      description,
+      deadline,
       donationAmount: Number(campaign.minDonation),
     };
 
@@ -60,37 +74,37 @@ const CampaignDetails = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold text-center mb-6">{campaign.title}</h1>
+      <h1 className="text-3xl font-bold text-center mb-6">{title}</h1>
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
         <img
           className="w-full h-64 object-cover rounded-lg mb-4"
-          src={campaign.imageURL}
-          alt={campaign.title}
+          src={imageURL}
+          alt={title}
         />
         <div>
           <table className="table w-full">
             <tbody className="text-left *:border">
               <tr className="*:border">
                 <th>Type: </th>
-                <td>{campaign.type}</td>
+                <td>{type}</td>
               </tr>
               <tr className="*:border">
                 <th>Minimum Donation: </th>
-                <td>{campaign.minDonation}</td>
+                <td>{minDonation}</td>
               </tr>
               <tr className="*:border">
                 <th>Deadline: </th>
-                <td>{new Date(campaign.deadline).toLocaleDateString()}</td>
+                <td>{new Date(deadline).toLocaleDateString()}</td>
               </tr>
               <tr className="*:border">
                 <th>Description: </th>
-                <td>{campaign.description}</td>
+                <td>{description}</td>
               </tr>
               <tr className="*:border">
                 <th>Money Raised:</th>
                 <td>
-                  {campaign.fundBalance}
-                  {"   "}
+                  {balance}
+
                   <small className="text-right">
                     *Reload to see current balance
                   </small>
@@ -107,7 +121,7 @@ const CampaignDetails = () => {
         >
           Donate
         </button>
-        {campaign.email == user.email && (
+        {email == user.email && (
           <p className="text-red-500 mt-2">
             You can&apos;t donate on your campaign.
           </p>
