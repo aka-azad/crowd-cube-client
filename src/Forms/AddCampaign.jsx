@@ -82,10 +82,10 @@ const AddCampaign = () => {
             required
           >
             <option value="">Select a type</option>
-            <option value="personal">Personal Issue</option>
-            <option value="startup">Startup</option>
-            <option value="business">Business</option>
-            <option value="creative">Creative Ideas</option>
+            <option value="Personal">Personal Issue</option>
+            <option value="Startup">Startup</option>
+            <option value="Business">Business</option>
+            <option value="Creative Ideas">Creative Ideas</option>
           </select>
         </div>
         <div className="form-control mb-4">
