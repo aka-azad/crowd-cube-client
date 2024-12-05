@@ -69,7 +69,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <ThemeToggle/>
+          <ThemeToggle />
           {loading ? (
             <span className="loading loading-spinner loading-lg flex item-center mx-auto"></span>
           ) : user ? (
@@ -89,25 +89,22 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[10000] mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-primary text-primary-content rounded-box z-[10000] mt-3 w-52 p-2 shadow-2xl"
               >
                 <li>
-                  <a className="justify-between">Profile</a>
+                  <p className="justify-between">{user.displayName}</p>
                 </li>
                 <li>
-                  <a>Settings</a>
-                </li>
-                <li>
-                  <a onClick={signOutUser}>Logout</a>
+                  <p onClick={signOutUser}>Logout</p>
                 </li>
               </ul>
             </div>
           ) : (
             <>
-              <Link to={"/signup"} className="btn">
+              <Link to={"/signup"} className="btn btn-primary">
                 Sign Up
               </Link>
-              <Link to={"/signin"} className="btn">
+              <Link to={"/signin"} className="btn btn-secondary">
                 Sign In
               </Link>
             </>
