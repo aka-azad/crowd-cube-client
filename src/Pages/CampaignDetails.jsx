@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
@@ -8,7 +8,17 @@ const CampaignDetails = () => {
   const { user } = useContext(AuthContext);
   const [balance, setBalance] = useState(campaign.fundBalance);
 
-  const isDeadlinePassed = new Date(campaign.deadline) < new Date();
+  const [isDonatable, setDonatable] = useState(false);
+  //   const isDeadlinePassed = new Date(campaign.deadline) < new Date();
+  useEffect(() => {
+    if (
+      campaign.email == user.email ||
+      new Date(campaign.deadline) < new Date()
+    ) {
+      setDonatable(true);
+    }
+  }, []);
+  console.log(isDonatable);
   const handleDonate = async () => {
     const donationData = {
       campaignId: campaign._id,
@@ -79,7 +89,8 @@ const CampaignDetails = () => {
               <tr className="*:border">
                 <th>Money Raised:</th>
                 <td>
-                  {campaign.fundBalance}{"   "}
+                  {campaign.fundBalance}
+                  {"   "}
                   <small className="text-right">
                     *Reload to see current balance
                   </small>
@@ -92,11 +103,16 @@ const CampaignDetails = () => {
         <button
           onClick={handleDonate}
           className="btn btn-primary mt-4"
-          disabled={isDeadlinePassed}
+          disabled={isDonatable}
         >
           Donate
         </button>
-        {isDeadlinePassed && (
+        {campaign.email == user.email && (
+          <p className="text-red-500 mt-2">
+            You can&apos;t donate on your campaign.
+          </p>
+        )}
+        {new Date(campaign.deadline) < new Date() && (
           <p className="text-red-500 mt-2">
             The deadline for this campaign has passed.
           </p>
