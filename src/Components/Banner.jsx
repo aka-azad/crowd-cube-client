@@ -1,5 +1,6 @@
 import "swiper/css";
 import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const Banner = () => {
@@ -12,13 +13,17 @@ const Banner = () => {
   return (
     <div className="container mx-auto my-11">
       <Swiper
-        navigation
+        modules={[Navigation]}
+        navigation={true}
         spaceBetween={50}
         slidesPerView={1}
       >
         {imgLinks.map((link, i) => (
           <SwiperSlide key={i}>
-            <img className="w-full max-h-[500px] rounded-2xl object-center object-cover" src={link} />
+            <img
+              className="w-full max-h-[500px] rounded-2xl object-center object-cover"
+              src={link}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -1,10 +1,11 @@
 import Banner from "../Components/Banner";
+import RunningCampaigns from "../Components/RunningCampaigns";
 
 const Home = () => {
   return (
     <div>
-      Home
       <Banner />
+      <RunningCampaigns/>
     </div>
   );
 };

@@ -10,6 +10,7 @@ import AddCampaign from "../Forms/AddCampaign";
 import MyCampaigns from "../Pages/MyCampaigns";
 import MyDonations from "../Pages/MyDonations";
 import UpdateCampaign from "../Forms/UpdateCampaign";
+import CampaignDetails from "../Pages/CampaignDetails";
 
 const Router = new createBrowserRouter([
   {
@@ -41,6 +42,16 @@ const Router = new createBrowserRouter([
         ),
       },
       {
+        path: "campaign-details/:id",
+        element: (
+          <PrivateRoute>
+            <CampaignDetails />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/campaign/${params.id}`),
+      },
+      {
         path: "update-campaign/:id",
         element: (
           <PrivateRoute>
@@ -48,7 +59,7 @@ const Router = new createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/my-campaigns/${params.id}`),
+          fetch(`http://localhost:5000/campaign/${params.id}`),
       },
       {
         path: "my-campaigns",
