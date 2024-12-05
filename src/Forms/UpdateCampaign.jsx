@@ -50,7 +50,7 @@ const UpdateCampaign = () => {
       <h1 className="text-3xl font-bold text-center mb-6">Update Campaign</h1>
       <form
         onSubmit={handleSubmit}
-        className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md"
+        className="max-w-lg mx-auto p-8 rounded-lg shadow-md"
       >
         <div className="form-control mb-4">
           <label className="label">

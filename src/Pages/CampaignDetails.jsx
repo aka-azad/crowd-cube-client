@@ -75,7 +75,7 @@ const CampaignDetails = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold text-center mb-6">{title}</h1>
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+      <div className="max-w-4xl mx-auto  rounded-lg shadow-lg p-6">
         <img
           className="w-full h-64 object-cover rounded-lg mb-4"
           src={imageURL}

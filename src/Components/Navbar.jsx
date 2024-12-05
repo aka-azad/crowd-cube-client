@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const { user, loading, signOutUser } = useContext(AuthContext);
@@ -68,6 +69,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
+          <ThemeToggle/>
           {loading ? (
             <span className="loading loading-spinner loading-lg flex item-center mx-auto"></span>
           ) : user ? (

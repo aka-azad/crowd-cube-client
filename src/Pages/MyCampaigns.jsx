@@ -84,7 +84,7 @@ const MyCampaigns = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 min-h-[600px]">
       <h1 className="text-3xl font-bold text-center mb-6">My Campaigns</h1>
       <div className="overflow-x-auto">
         <table className="table w-full">
@@ -99,24 +99,26 @@ const MyCampaigns = () => {
           </thead>
           <tbody>
             {myCampaigns.map((campaign) => (
-              <tr className="*:border" key={campaign._id}>
-                <td className="font-semibold">{campaign.title}</td>
+              <tr className="*:border " key={campaign._id}>
+                <td className="font-semibold ">{campaign.title}</td>
                 <td>{campaign.type}</td>
                 <td>{campaign.minDonation}</td>
                 <td>{new Date(campaign.deadline).toLocaleDateString()}</td>
-                <td className="md:flex">
-                  <Link
-                    to={`/update-campaign/${campaign._id}`}
-                    className="btn btn-sm btn-primary mr-2 mb-2 md:w-1/2 w-auto"
-                  >
-                    Update
-                  </Link>
-                  <button
-                    onClick={() => handleDelete(campaign._id)}
-                    className="btn btn-sm btn-danger md:w-1/2 w-auto"
-                  >
-                    Delete
-                  </button>
+                <td>
+                  <div className="md:flex">
+                    <Link
+                      to={`/update-campaign/${campaign._id}`}
+                      className="btn btn-sm btn-primary mr-2 mb-2 md:w-1/2 w-auto"
+                    >
+                      Update
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(campaign._id)}
+                      className="btn btn-sm btn-warning md:w-1/2 w-auto"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
