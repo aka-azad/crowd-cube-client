@@ -57,7 +57,6 @@ const CampaignDetails = () => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             if (data.modifiedCount > 0) {
               setBalance(balance + Number(campaign.minDonation));
               toast.success("Donation successful!");

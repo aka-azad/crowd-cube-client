@@ -20,9 +20,7 @@ const MyCampaigns = () => {
   }, [user]);
 
   if (loading) {
-    return (
-      <LottieLoader/>
-    );
+    return <LottieLoader />;
   }
   if (myCampaigns.length == 0) {
     return (
@@ -52,7 +50,7 @@ const MyCampaigns = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setLoading(true);
-        fetch(`http://localhost:5000/campaigns/${id}`, {
+        fetch(`http://localhost:5000/my-campaigns/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -77,7 +75,7 @@ const MyCampaigns = () => {
               icon: "error",
               title: "Oops...",
               text: "Something went wrong!",
-              footer: `<p>${err.message}</p>`,
+              footer: `<p>Please check your internet connection</p>`,
             });
           });
       }

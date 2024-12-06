@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 
@@ -29,28 +29,29 @@ const CampaignCard = ({ campaign }) => {
   };
 
   return (
-    <div className="max-w-sm rounded-2xl border border-white border-opacity-20 overflow-hidden pb-4 shadow-lg ">
+    <div className="max-w-sm rounded-2xl border border-white border-opacity-20 overflow-hidden pb-4 shadow-lg flex flex-col h-full">
       <img
         className="w-full h-64 object-cover"
         src={campaign.imageURL}
         alt={campaign.title}
       />
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{campaign.title}</div>
-        <p className=" text-base">Type: {campaign.type}</p>
-        <p className=" text-base">Minimum Donation: {campaign.minDonation}</p>
-        <p className=" text-base">
-          Deadline: {new Date(campaign.deadline).toLocaleDateString()}
-        </p>
-        <p className=" text-base">{campaign.description}</p>
-      </div>
-      <div>
-        <div className="px-6 pt-2 pb-2">
-          <button onClick={handleSeeMore}
-            className=" btn btn-primary rounded-lg    text-sm font-semibold"
+      <div className="card-body p-0 flex flex-col flex-grow">
+        <div className="px-6 py-4 flex-grow">
+          <div className="font-bold text-xl mb-2">{campaign.title}</div>
+          <p className="text-base">Type: {campaign.type}</p>
+          <p className="text-base">Minimum Donation: {campaign.minDonation}</p>
+          <p className="text-base">
+            Deadline: {new Date(campaign.deadline).toLocaleDateString()}
+          </p>
+          <p className="text-base">{campaign.description}</p>
+        </div>
+        <div className="px-6 pt-2 pb-2 card-actions justify-end">
+          <button
+            onClick={handleSeeMore}
+            className="btn btn-primary rounded-lg text-sm font-semibold"
           >
             See More
-          </button >
+          </button>
         </div>
       </div>
     </div>

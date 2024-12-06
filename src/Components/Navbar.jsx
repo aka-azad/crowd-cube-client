@@ -2,8 +2,6 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import ThemeToggle from "./ThemeToggle";
-import Lottie from "lottie-react";
-import lottieLooking from "../assets/lottieLooking.json";
 
 const Navbar = () => {
   const { user, loading, signOutUser } = useContext(AuthContext);
@@ -36,7 +34,11 @@ const Navbar = () => {
       <div className="navbar max-w-[1300px] mx-auto">
         <div className="navbar-start items-center">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn pl-0 pr-2 btn-ghost lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn pl-0 pr-2 btn-ghost lg:hidden"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -75,9 +77,7 @@ const Navbar = () => {
             <ThemeToggle />
           </div>
           {loading ? (
-            <div className="h-[50px] w-[60px]">
-              <Lottie animationData={lottieLooking} className="h-full w-full" />
-            </div>
+            <span className="loading loading-spinner loading-lg flex item-center mx-auto"></span>
           ) : // <span className="loading loading-spinner loading-lg flex item-center mx-auto"></span>
           user ? (
             <div className="dropdown dropdown-hover dropdown-end">
@@ -108,11 +108,8 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link
-                to="/signup"
-                className="btn btn-primary mr-2"
-              >
-                Sign Up
+              <Link to="/signup" className="btn btn-primary mr-2">
+                Register
               </Link>
               <Link to="/signin" className="btn btn-secondary">
                 Sign In

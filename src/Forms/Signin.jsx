@@ -12,12 +12,31 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  // const navigate = useNavigate();
 
   if (user) {
     return <Navigate to={"/"} />;
   }
+
+  const validatePassword = (password) => {
+    if (!/[A-Z]/.test(password)) {
+      return "Password must contain at least one uppercase letter.";
+    }
+    if (!/[a-z]/.test(password)) {
+      return "Password must contain at least one lowercase letter.";
+    }
+    if (password.length < 6) {
+      return "Password must be at least 6 characters long.";
+    }
+    return null;
+  };
+
   const handleSubmit = (e) => {
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      toast.error(passwordError);
+
+      return;
+    }
     setLoading(true);
     e.preventDefault();
     setError("");
