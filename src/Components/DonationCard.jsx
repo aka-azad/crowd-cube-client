@@ -1,9 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router";
 
-const CampaignCard = ({ campaign }) => {
- 
-
+const DonationCard = ({ campaign }) => {
   return (
     <div className="max-w-sm rounded-2xl border border-white border-opacity-20 overflow-hidden pb-4 shadow-lg flex flex-col h-full">
       <img
@@ -23,7 +21,7 @@ const CampaignCard = ({ campaign }) => {
         </div>
         <div className="px-6 pt-2 pb-2 card-actions justify-end">
           <Link
-            to={`/campaign-details/${campaign._id}`}
+            to={`/campaign-details/${campaign.campaignId}`}
             className="btn btn-primary rounded-lg text-sm font-semibold"
           >
             See More
@@ -34,8 +32,8 @@ const CampaignCard = ({ campaign }) => {
   );
 };
 
-CampaignCard.propTypes = {
+DonationCard.propTypes = {
   campaign: PropTypes.object.isRequired,
 };
 
-export default CampaignCard;
+export default DonationCard;

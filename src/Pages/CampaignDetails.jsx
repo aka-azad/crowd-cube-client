@@ -26,7 +26,7 @@ const CampaignDetails = () => {
     ) {
       setDonatable(true);
     }
-  }, []);
+  }, [campaign, user]);
   const handleDonate = () => {
     const donationData = {
       campaignId: _id,
