@@ -3,8 +3,8 @@ import lottieLooking from "../assets/lottieLooking.json";
 
 const LottieLoader = () => {
   return (
-    <div>
-      <Lottie animationData={lottieLooking} />
+    <div className="w-[200px] mx-auto">
+      <Lottie style={{ flex: 1 }} animationData={lottieLooking} height={8} />
     </div>
   );
 };

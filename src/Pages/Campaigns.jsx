@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import LottieLoader from "../Components/LottieLoader";
-import { Link } from "react-router"; 
+import { Link } from "react-router";
 
 const Campaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [originalCampaigns, setOriginalCampaigns] = useState([]); 
-  const [sortOrder, setSortOrder] = useState("default"); 
+  const [originalCampaigns, setOriginalCampaigns] = useState([]);
+  const [sortOrder, setSortOrder] = useState("default");
 
   useEffect(() => {
     fetch("http://localhost:5000/campaigns")
       .then((response) => response.json())
       .then((data) => {
         setCampaigns(data);
-        setOriginalCampaigns(data); 
+        setOriginalCampaigns(data);
         setLoading(false);
       })
       .catch((error) => console.error("Error fetching projects:", error));
@@ -22,9 +22,13 @@ const Campaigns = () => {
   const handleSort = (order) => {
     let sortedCampaigns;
     if (order === "asc") {
-      sortedCampaigns = [...campaigns].sort((a, b) => a.minDonation - b.minDonation);
+      sortedCampaigns = [...campaigns].sort(
+        (a, b) => a.minDonation - b.minDonation
+      );
     } else if (order === "desc") {
-      sortedCampaigns = [...campaigns].sort((a, b) => b.minDonation - a.minDonation);
+      sortedCampaigns = [...campaigns].sort(
+        (a, b) => b.minDonation - a.minDonation
+      );
     } else {
       sortedCampaigns = originalCampaigns;
     }
@@ -45,7 +49,7 @@ const Campaigns = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold text-center mb-6">All Campaigns</h1>
       <div className="flex justify-end items-center mb-4">
-        <span className="mr-2 text-gray-800 dark:text-white">Sort by:</span> {/* Updated text color */}
+        <span className="mr-2 text-gray-800 dark:text-white">Sort by:</span>
         <div className="relative inline-block">
           <select
             onChange={(e) => handleSort(e.target.value)}
@@ -57,7 +61,13 @@ const Campaigns = () => {
             <option value="desc">Maximum Donation</option>
           </select>
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-white">
-            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
+            <svg
+              className="fill-current h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+            </svg>
           </div>
         </div>
       </div>
