@@ -39,5 +39,5 @@ Crowdcube's frontend is built using React and Tailwind CSS to provide a responsi
 1. Clone the repository.
 2. Install dependencies using `npm install`.
 3. Set up environment variables for Firebase.
-4. Run the development server using `npm start`.
+4. Run the development server using `npm run dev`.
 5. Deploy using Netlify or your preferred hosting service.
