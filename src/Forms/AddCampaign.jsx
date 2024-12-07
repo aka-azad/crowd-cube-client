@@ -24,7 +24,7 @@ const AddCampaign = () => {
       fundBalance: 0,
     };
 
-    fetch("http://localhost:5000/campaigns", {
+    fetch("https://crowdcube-server-phi.vercel.app/campaigns", {
       method: "POST",
       headers: {
         "content-type": "application/json",

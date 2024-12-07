@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import CampaignCard from "./CampaignCard";
 import LottieLoader from "./LottieLoader";
+import { Link } from "react-router";
 
 const RunningCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/running-campaigns")
+    fetch("https://crowdcube-server-phi.vercel.app/running-campaigns")
       .then((response) => response.json())
       .then((data) => {
         setCampaigns(data);
@@ -35,6 +36,14 @@ const RunningCampaigns = () => {
         {campaigns.map((campaign) => (
           <CampaignCard key={campaign._id} campaign={campaign} />
         ))}
+      </div>
+      <div className="w-fit mx-auto">
+        <Link
+          className="btn btn-accent rounded-lg font-bold mt-6"
+          to={"/campaigns"}
+        >
+          Show More
+        </Link>
       </div>
     </div>
   );

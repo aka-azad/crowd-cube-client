@@ -49,7 +49,9 @@ const Router = new createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/campaign/${params.id}`),
+          fetch(
+            `https://crowdcube-server-phi.vercel.app/campaign/${params.id}`
+          ),
       },
       {
         path: "update-campaign/:id",
@@ -59,7 +61,9 @@ const Router = new createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/campaign/${params.id}`),
+          fetch(
+            `https://crowdcube-server-phi.vercel.app/campaign/${params.id}`
+          ),
       },
       {
         path: "my-campaigns",

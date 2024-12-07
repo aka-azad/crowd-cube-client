@@ -44,7 +44,10 @@ const Signin = () => {
       .then(() => {
         setLoading(false);
       })
-      .catch((err) => setError(err.message));
+      .catch((err) => {
+        setLoading(false);
+        toast.error(err.message);
+      });
   };
 
   const handleGoogleLogin = () => {
@@ -53,7 +56,7 @@ const Signin = () => {
     signinWithGoogle()
       .then((res) => {
         setLoading(false);
-        fetch("http://localhost:5000/users", {
+        fetch("https://crowdcube-server-phi.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -70,13 +73,12 @@ const Signin = () => {
           })
           .catch((err) => console.log(err));
       })
-      .catch((err) => setError(err.message));
+      .catch((err) => toast.error(err.message));
   };
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold text-center mb-4">Log In</h1>
-      {error && <p className="text-red-500">{error}</p>}
       <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
         <div className="form-control mb-4">
           <label className="label">
@@ -110,6 +112,7 @@ const Signin = () => {
       </form>
       <div className="divider max-w-sm mx-auto">OR</div>
       <div className="flex flex-col items-center mt-4">
+        {error && <p className="text-red-500">{error}</p>}
         <button
           onClick={handleGoogleLogin}
           className="btn btn-primary btn-circle"

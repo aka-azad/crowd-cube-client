@@ -10,7 +10,9 @@ const MyDonations = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/donations?userEmail=${user.email}`)
+    fetch(
+      `https://crowdcube-server-phi.vercel.app/my-donations?userEmail=${user.email}`
+    )
       .then((response) => response.json())
       .then((data) => {
         setDonations(data);

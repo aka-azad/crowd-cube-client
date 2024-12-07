@@ -11,7 +11,9 @@ const MyCampaigns = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/campaigns/${user.email}`)
+    fetch(
+      `https://crowdcube-server-phi.vercel.app/my-campaigns?userEmail=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setMyCampaigns(data);
@@ -50,9 +52,12 @@ const MyCampaigns = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setLoading(true);
-        fetch(`http://localhost:5000/my-campaigns/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://crowdcube-server-phi.vercel.app/my-campaigns/delete/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);

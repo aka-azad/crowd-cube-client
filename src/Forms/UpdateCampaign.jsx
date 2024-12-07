@@ -27,7 +27,7 @@ const UpdateCampaign = () => {
       email: user.email,
     };
 
-    fetch(`http://localhost:5000/campaigns/${campaign._id}`, {
+    fetch(`https://crowdcube-server-phi.vercel.app/campaigns/${campaign._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -36,7 +36,7 @@ const UpdateCampaign = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         if (data.modifiedCount > 0) {
           toast.success("Campaign Updated successfully!");
           navigate("/my-campaigns");

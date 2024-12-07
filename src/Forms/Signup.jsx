@@ -43,13 +43,16 @@ const Signup = () => {
       .then(() => {
         updateProfile(auth.currentUser, { displayName: name, photoURL });
         toast.success("Successfully registered!");
-        fetch("http://localhost:5000/users", {
+        fetch("https://crowdcube-server-phi.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
           },
           body: JSON.stringify({ displayName: name, photoURL, email }),
-        }).catch((err) => console.log(err));
+        }).catch((err) => {
+          toast.error(err.message);
+          console.log(err);
+        });
         navigate("/");
       })
       .catch((err) => {
@@ -61,7 +64,6 @@ const Signup = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold text-center mb-4">Register</h1>
-      {error && <p className="text-red-500">{error}</p>}
       <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
         <div className="form-control mb-4">
           <label className="label">
@@ -110,6 +112,7 @@ const Signup = () => {
             required
           />
         </div>
+        {error && <p className="text-red-500">{error}</p>}
         <div className="form-control">
           <button type="submit" className="btn btn-primary w-full">
             Register

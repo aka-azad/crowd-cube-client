@@ -41,20 +41,23 @@ const CampaignDetails = () => {
       donationAmount: Number(campaign.minDonation),
     };
 
-    fetch("http://localhost:5000/donations", {
+    fetch("https://crowdcube-server-phi.vercel.app/donations", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(donationData),
     })
       .then((response) => response.json())
       .then(() => {
-        fetch(`http://localhost:5000/fundBalance/${campaign._id}`, {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ fundBalance: Number(campaign.minDonation) }),
-        })
+        fetch(
+          `https://crowdcube-server-phi.vercel.app/fundBalance/${campaign._id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({ fundBalance: Number(campaign.minDonation) }),
+          }
+        )
           .then((response) => response.json())
           .then((data) => {
             if (data.modifiedCount > 0) {

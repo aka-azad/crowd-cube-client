@@ -9,7 +9,7 @@ const Campaigns = () => {
   const [sortOrder, setSortOrder] = useState("default");
 
   useEffect(() => {
-    fetch("http://localhost:5000/campaigns")
+    fetch("https://crowdcube-server-phi.vercel.app/campaigns")
       .then((response) => response.json())
       .then((data) => {
         setCampaigns(data);
