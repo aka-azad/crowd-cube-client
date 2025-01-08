@@ -2,13 +2,13 @@ import { Link } from "react-router";
 
 const Footer = () => {
   return (
-    <div className="bg-gray-800 text-white">
+    <div className="bg-accent text-accent-content ">
       <footer className="max-w-[1300px] mx-auto py-6">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-between items-center">
             <div className="w-full md:w-1/3 mb-4 md:mb-0">
               <h2 className="text-2xl font-bold">CrowdCube</h2>
-              <p className="mt-2 text-gray-400">
+              <p className="mt-2 text-gray-700">
                 Empowering ideas, funding futures.
               </p>
             </div>
@@ -16,14 +16,14 @@ const Footer = () => {
               <h3 className="text-xl font-semibold mb-2">Quick Links</h3>
               <ul>
                 <li>
-                  <Link to={"/"} className="text-gray-400 hover:text-white">
+                  <Link to={"/"} className="text-gray-700 hover:text-white">
                     Home
                   </Link>
                 </li>
                 <li>
                   <Link
                     to={"/campaigns"}
-                    className="text-gray-400 hover:text-white"
+                    className="text-gray-700 hover:text-white"
                   >
                     All Campaigns
                   </Link>
@@ -31,7 +31,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to={"/add-campaign"}
-                    className="text-gray-400 hover:text-white"
+                    className="text-gray-700 hover:text-white"
                   >
                     Add Campaign
                   </Link>
@@ -39,7 +39,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to={"/my-campaigns"}
-                    className="text-gray-400 hover:text-white"
+                    className="text-gray-700 hover:text-white"
                   >
                     My Campaigns
                   </Link>
@@ -47,7 +47,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to={"/my-donations"}
-                    className="text-gray-400 hover:text-white"
+                    className="text-gray-700 hover:text-white"
                   >
                     My Donations
                   </Link>
@@ -56,14 +56,14 @@ const Footer = () => {
             </div>
             <div className="w-full md:w-1/3">
               <h3 className="text-xl font-semibold mb-2">Contact Us</h3>
-              <p className="text-gray-400">
+              <p className="text-gray-700">
                 123 Crowdcube Street, Funding City
               </p>
-              <p className="text-gray-400">Email: support@crowdcube.com</p>
+              <p className="text-gray-700">Email: support@crowdcube.com</p>
               <div className="flex mt-2">
                 <a
                   href="https://facebook.com"
-                  className="text-gray-400 hover:text-white mx-2"
+                  className="text-gray-700 hover:text-white mx-2"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@ const Footer = () => {
                 </a>
                 <a
                   href="https://twitter.com"
-                  className="text-gray-400 hover:text-white mx-2"
+                  className="text-gray-700 hover:text-white mx-2"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +89,7 @@ const Footer = () => {
                 </a>
                 <a
                   href="https://linkedin.com"
-                  className="text-gray-400 hover:text-white mx-2"
+                  className="text-gray-700 hover:text-white mx-2"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +103,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="text-center text-gray-400 mt-6">
+          <div className="text-center text-gray-800 mt-6">
             &copy; 2024 Crowdcube. All rights reserved.
           </div>
         </div>

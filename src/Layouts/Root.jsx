@@ -6,15 +6,15 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Root() {
   return (
-    <>
+    <div className="">
       <Navbar />
-      <hr className="border-2" />
-      <div className="max-w-[1280px] mx-auto">
+
+      <div className="max-w-[1280px] w-full min-h-[70vh] mx-auto  sm:p-0 px-2 ">
         <Outlet />
       </div>
-      <ToastContainer position="top-center" />
       <Footer />
-    </>
+      <ToastContainer position="top-center" />
+    </div>
   );
 }
 

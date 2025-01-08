@@ -1,9 +1,12 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { AuthContext } from "../Provider/AuthProvider";
+import AuthContext from "../Provider/AuthContext";
 import { updateProfile } from "firebase/auth";
 import auth from "../Firebase/firebase.config";
+import signupSVG from "../assets/signup.svg";
+import { Fade } from "react-awesome-reveal";
+import axios from "axios";
 
 const Signup = () => {
   const { setLoading, signUpWithEmailPassword } = useContext(AuthContext);
@@ -43,16 +46,20 @@ const Signup = () => {
       .then(() => {
         updateProfile(auth.currentUser, { displayName: name, photoURL });
         toast.success("Successfully registered!");
-        fetch("https://crowdcube-server-phi.vercel.app/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ displayName: name, photoURL, email }),
-        }).catch((err) => {
-          toast.error(err.message);
-          console.log(err);
-        });
+        axios
+          .post(
+            "http://localhost:5000/users",
+            {
+              displayName: name,
+              photoURL,
+              email,
+            },
+            { withCredentials: true }
+          )
+          .catch((err) => {
+            toast.error(err.message);
+            console.log(err);
+          });
         navigate("/");
       })
       .catch((err) => {
@@ -62,71 +69,80 @@ const Signup = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold text-center mb-4">Register</h1>
-      <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text">Name</span>
-          </label>
-          <input
-            type="text"
-            className="input input-bordered"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+    <div className="container overflow-hidden mx-auto p-4 grid sm:grid-cols-2">
+      <Fade direction="left">
+        <div className="sm:pt-10 pb-3">
+          <h1 className="text-2xl font-bold text-center mb-4">Register</h1>
+          <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
+            <div className="form-control mb-4">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                className="input input-bordered"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-control mb-4">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                type="email"
+                className="input input-bordered"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-control mb-4">
+              <label className="label">
+                <span className="label-text">Photo URL</span>
+              </label>
+              <input
+                type="text"
+                className="input input-bordered"
+                value={photoURL}
+                onChange={(e) => setPhotoURL(e.target.value)}
+              />
+            </div>
+            <div className="form-control mb-4">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <input
+                type="password"
+                className="input input-bordered"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            {error && <p className="text-red-500">{error}</p>}
+            <div className="form-control">
+              <button type="submit" className="btn btn-primary w-full">
+                Register
+              </button>
+            </div>
+          </form>
+          <div className="flex flex-col items-center mt-4">
+            <p>
+              Already have an account?{" "}
+              <Link to="/signin" className="text-blue-500">
+                Sign In
+              </Link>
+            </p>
+          </div>
         </div>
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text">Email</span>
-          </label>
-          <input
-            type="email"
-            className="input input-bordered"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+      </Fade>
+      <Fade direction="right">
+        <div className="hidden sm:flex">
+          <img src={signupSVG} alt="" />
         </div>
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text">Photo URL</span>
-          </label>
-          <input
-            type="text"
-            className="input input-bordered"
-            value={photoURL}
-            onChange={(e) => setPhotoURL(e.target.value)}
-          />
-        </div>
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text">Password</span>
-          </label>
-          <input
-            type="password"
-            className="input input-bordered"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <p className="text-red-500">{error}</p>}
-        <div className="form-control">
-          <button type="submit" className="btn btn-primary w-full">
-            Register
-          </button>
-        </div>
-      </form>
-      <div className="flex flex-col items-center mt-4">
-        <p>
-          Already have an account?{" "}
-          <Link to="/signin" className="text-blue-500">
-            Sign In
-          </Link>
-        </p>
-      </div>
+      </Fade>
     </div>
   );
 };

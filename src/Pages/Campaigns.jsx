@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import LottieLoader from "../Components/LottieLoader";
-import { Link } from "react-router";
+import CampaignCard from "../Components/CampaignCard";
+import axios from "axios";
 
 const Campaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -9,11 +10,11 @@ const Campaigns = () => {
   const [sortOrder, setSortOrder] = useState("default");
 
   useEffect(() => {
-    fetch("https://crowdcube-server-phi.vercel.app/campaigns")
-      .then((response) => response.json())
+    axios
+      .get("http://localhost:5000/campaigns")
       .then((data) => {
-        setCampaigns(data);
-        setOriginalCampaigns(data);
+        setCampaigns(data.data);
+        setOriginalCampaigns(data.data);
         setLoading(false);
       })
       .catch((error) => console.error("Error fetching projects:", error));
@@ -38,7 +39,7 @@ const Campaigns = () => {
 
   if (loading) {
     return (
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto py-8">
         <h1 className="text-3xl font-bold text-center mb-6">All Campaigns</h1>
         <LottieLoader />
       </div>
@@ -46,15 +47,15 @@ const Campaigns = () => {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold text-center mb-6">All Campaigns</h1>
       <div className="flex justify-end items-center mb-4">
-        <span className="mr-2 text-gray-800 dark:text-white">Sort by:</span>
+        <span className="mr-2 font-semibold">Sort by:</span>
         <div className="relative inline-block">
           <select
             onChange={(e) => handleSort(e.target.value)}
             value={sortOrder}
-            className="block appearance-none w-full bg-white dark:bg-gray-700 text-gray-800 dark:text-white border border-gray-400 dark:border-gray-600 hover:border-gray-500 dark:hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            className="block appearance-none w-full bg-accent bg-opacity-30  text-gray-800  border-gray-400  hover:border-gray-500  px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
           >
             <option value="default">Default</option>
             <option value="asc">Minimum Donation</option>
@@ -71,39 +72,11 @@ const Campaigns = () => {
           </div>
         </div>
       </div>
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse">
-          <thead>
-            <tr>
-              <th className="border px-4 py-2">Title</th>
-              <th className="border px-4 py-2">Type</th>
-              <th className="border px-4 py-2">Minimum Donation</th>
-              <th className="border px-4 py-2">Deadline</th>
-              <th className="border px-4 py-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {campaigns.map((campaign) => (
-              <tr key={campaign._id}>
-                <td className="border px-4 py-2">{campaign.title}</td>
-                <td className="border px-4 py-2">{campaign.type}</td>
-                <td className="border px-4 py-2">{campaign.minDonation}</td>
-                <td className="border px-4 py-2">
-                  {new Date(campaign.deadline).toLocaleDateString()}
-                </td>
-                <td className="border px-4 py-2">
-                  <Link
-                    to={`/campaign-details/${campaign._id}`}
-                    className="btn btn-primary w-full font-semibold"
-                  >
-                    See More
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-center">
+        {campaigns.map((campaign) => (
+          <CampaignCard key={campaign._id} campaign={campaign} />
+        ))}
+      </div>{" "}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
+import AuthContext from "../Provider/AuthContext";
 import { Navigate } from "react-router";
 import LottieLoader from "../Components/LottieLoader";
 

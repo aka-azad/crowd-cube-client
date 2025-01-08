@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
+import AuthContext from "../Provider/AuthContext";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
 import LottieLoader from "../Components/LottieLoader";
+import axios from "axios";
 
 const MyCampaigns = () => {
   const { user } = useContext(AuthContext);
@@ -11,12 +12,12 @@ const MyCampaigns = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(
-      `https://crowdcube-server-phi.vercel.app/my-campaigns?userEmail=${user.email}`
-    )
-      .then((res) => res.json())
+    axios
+      .get(`http://localhost:5000/my-campaigns?userEmail=${user.email}`, {
+        withCredentials: true,
+      })
       .then((data) => {
-        setMyCampaigns(data);
+        setMyCampaigns(data.data);
         setLoading(false);
       });
   }, [user]);
@@ -52,16 +53,10 @@ const MyCampaigns = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setLoading(true);
-        fetch(
-          `https://crowdcube-server-phi.vercel.app/my-campaigns/delete/${id}`,
-          {
-            method: "DELETE",
-          }
-        )
-          .then((res) => res.json())
+        axios
+          .delete(`http://localhost:5000/my-campaigns/delete/${id}`)
           .then((data) => {
-            console.log(data);
-            if (data.deletedCount > 0) {
+            if (data.data.deletedCount > 0) {
               setLoading(false);
               setMyCampaigns(
                 myCampaigns.filter((campaign) => campaign._id !== id)

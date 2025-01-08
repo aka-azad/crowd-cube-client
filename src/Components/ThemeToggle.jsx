@@ -20,7 +20,8 @@ const ThemeToggle = () => {
         defaultChecked={theme === "forest"}
         onChange={toggleTheme}
       />
-      <span className="swap-on">🌞</span> <span className="swap-off text-right">🌙</span>
+      <span className="swap-on">🌞</span>{" "}
+      <span className="swap-off text-right">🌙</span>
     </label>
   );
 };

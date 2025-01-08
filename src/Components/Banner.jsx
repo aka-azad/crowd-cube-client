@@ -1,8 +1,11 @@
 import "swiper/css";
+import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
+
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Typewriter } from "react-simple-typewriter";
+import { useRef } from "react";
 
 const Banner = () => {
   const imgLinks = [
@@ -23,20 +26,34 @@ const Banner = () => {
       text: "Community Investment Opportunities",
     },
   ];
-
+  const progressCircle = useRef(null);
+  const progressContent = useRef(null);
+  const onAutoplayTimeLeft = (s, time, progress) => {
+    progressCircle.current.style.setProperty("--progress", 1 - progress);
+    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+  };
 
   return (
-    <div className="container mx-auto my-11">
+    <div className="container mx-auto mt-8 mb-11">
       <Swiper
-        modules={[Navigation]}
         navigation={true}
         spaceBetween={50}
         slidesPerView={1}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Autoplay, Pagination, Navigation]}
+        onAutoplayTimeLeft={onAutoplayTimeLeft}
+        className="mySwiper"
       >
         {imgLinks.map((slide, i) => (
           <SwiperSlide key={i} className="relative">
             <img
-              className="w-full max-h-[500px] rounded-2xl object-center object-cover"
+              className="w-full max-h-[70vh] rounded-2xl object-center object-cover"
               src={slide.link}
               alt={`slide-${i}`}
             />
@@ -53,6 +70,12 @@ const Banner = () => {
             </div>
           </SwiperSlide>
         ))}
+        <div className="autoplay-progress" slot="container-end">
+          <svg viewBox="0 0 48 48" ref={progressCircle}>
+            <circle cx="24" cy="24" r="20"></circle>
+          </svg>
+          <span ref={progressContent}></span>
+        </div>
       </Swiper>
     </div>
   );

@@ -1,10 +1,15 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router";
-import { AuthContext } from "../Provider/AuthProvider";
+import AuthContext from "../Provider/AuthContext";
 import ThemeToggle from "./ThemeToggle";
+
+import { HashLink } from "react-router-hash-link";
+import { useLocation } from "react-router";
 
 const Navbar = () => {
   const { user, loading, signOutUser } = useContext(AuthContext);
+  const location = useLocation();
+
   const publicLinks = (
     <>
       <li>
@@ -13,6 +18,20 @@ const Navbar = () => {
       <li>
         <NavLink to="/campaigns">All Campaigns</NavLink>
       </li>
+      {!user && (
+        <>
+          <li>
+            <HashLink smooth to="/#about-us">
+              About Us
+            </HashLink>
+          </li>
+          <li>
+            <HashLink smooth to="/#contact-us">
+              Contact Us
+            </HashLink>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -29,8 +48,9 @@ const Navbar = () => {
       </li>
     </>
   );
+
   return (
-    <div className="bg-gray-800 bg-opacity-70 backdrop-blur-lg text-white sticky top-0 z-50">
+    <div className="bg-accent shadow shadow-green-100 bg-opacity-70 backdrop-blur-lg text-accent-content sticky top-0 z-50">
       <div className="navbar max-w-[1300px] mx-auto">
         <div className="navbar-start items-center">
           <div className="dropdown">
@@ -78,8 +98,7 @@ const Navbar = () => {
           </div>
           {loading ? (
             <span className="loading loading-spinner loading-lg flex item-center mx-auto"></span>
-          ) : // <span className="loading loading-spinner loading-lg flex item-center mx-auto"></span>
-          user ? (
+          ) : user ? (
             <div className="dropdown dropdown-hover dropdown-end">
               <div
                 tabIndex={0}
@@ -108,10 +127,20 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to="/signup" className="btn btn-primary mr-2">
+              <Link
+                to="/signup"
+                className={`btn btn-primary mr-2 ${
+                  location.pathname == "/signup" && "hidden"
+                }`}
+              >
                 Register
               </Link>
-              <Link to="/signin" className="btn btn-secondary">
+              <Link
+                to="/signin"
+                className={`btn btn-primary mr-2 ${
+                  location.pathname == "/signin" && "hidden"
+                }`}
+              >
                 Sign In
               </Link>
             </>
